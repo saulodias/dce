@@ -10,10 +10,13 @@
           <input matInput placeholder="Sobrenome" formControlName="sobrenome">
         </mat-form-field>
       </div>
-      <div fxLayout="row">
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
         <mat-form-field>
           <input matInput placeholder="Email" type="email" formControlName="email">
         </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Celular" formControlName="celular" mask="(00) 0000-00000">
+          </mat-form-field>
       </div>
       <div fxLayout="row">
         <mat-form-field>
@@ -37,6 +40,32 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="dadosAcademicos">
+      <form [formGroup]="dadosAcademicos">
+        <ng-template matStepLabel>Dados Acadêmicos</ng-template>
+        <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+          <mat-form-field>
+            <input matInput placeholder="Matrícula" formControlName="matricula" style="text-transform: uppercase;" maxlength="11">
+            <mat-error *ngIf="dadosAcademicos.controls.matricula?.errors?.pattern || 
+            dadosAcademicos.controls.matricula?.errors?.matricula">A matrícula digitada é inválida.</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Curso" formControlName="curso" readonly>
+          </mat-form-field>
+        </div>
+        <!-- <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+          <mat-form-field>
+            <input matInput placeholder="Logradouro" formControlName="logradouro">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Número" formControlName="numero">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Complemento" formControlName="complemento">
+          </mat-form-field>
+        </div> -->
+      </form>
+    </mat-step>
   <mat-step [stepControl]="endereco">
     <form [formGroup]="endereco">
       <ng-template matStepLabel>Endereço</ng-template>
@@ -79,8 +108,8 @@
     <ng-template matStepLabel>Fim</ng-template>
     You are now done.
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button matStepperPrevious>Voltar</button>
+      <button mat-button (click)="stepper.reset()">Avançar</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>

@@ -48,6 +48,7 @@ function cpfValidator(control: FormControl) {
 
 export class DneFormComponent implements OnInit {
   dadosPessoais: FormGroup;
+  dadosAcademicos: FormGroup;
   endereco: FormGroup;
   searchingCep = false;
   cepIsInvalid = false;
@@ -76,6 +77,10 @@ export class DneFormComponent implements OnInit {
         Validators.min(4),
         cpfValidator]],
     });
+    this.dadosAcademicos = this.formBuilder.group({
+      matricula: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')],
+      curso: ['']
+    });
     this.endereco = this.formBuilder.group({
       cep: ['', Validators.required],
       logradouro: ['', Validators.required],
@@ -91,6 +96,27 @@ export class DneFormComponent implements OnInit {
         this.getCep(cep);
       }
     });
+
+    this.dadosAcademicos.controls.matricula.valueChanges.subscribe(matricula => {
+      if (matricula.length >= 10) {
+        this.autoCompleteCurso(matricula);
+      }
+    });
+  }
+  autoCompleteCurso(matricula: string) {
+    const cursos = {
+      gaut: 'Engenharia de Controle e Automação',
+      gel: 'Engenharia Elétrica',
+      gelt: 'Engenharia Eletrônica',
+      gtel: 'Engeharia de Telecomunicações'
+    };
+    const curso = matricula.substr(7).toLowerCase();
+
+    if (cursos[curso] !== undefined) {
+      this.dadosAcademicos.controls.curso.setValue(cursos[curso]);
+    } else {
+      this.dadosAcademicos.controls.matricula.setErrors({matricula: true});
+    }
   }
 
   autoCompleteAddress() {
