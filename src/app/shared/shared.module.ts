@@ -7,6 +7,7 @@ import { CustomMaterialModule } from './material/custom-material.module';
   declarations: [],
   imports: [ CommonModule ],
   exports: [
+    CommonModule,
     CustomMaterialModule
   ]
 })

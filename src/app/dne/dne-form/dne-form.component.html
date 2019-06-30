@@ -12,7 +12,7 @@
       </div>
       <div fxLayout="row">
         <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email">
+          <input matInput placeholder="Email" type="email" formControlName="email">
         </mat-form-field>
       </div>
       <div fxLayout="row">
@@ -25,10 +25,11 @@
       </div>
       <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
         <mat-form-field>
-          <input matInput placeholder="RG" formControlName="rg">
+          <input matInput placeholder="RG" formControlName="rg" mask="00.000.000-0">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="CPF" formControlName="cpf">
+          <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00">
+          <mat-error *ngIf="dadosPessoais.controls.cpf?.errors?.cpf">O CPF digitádo é inválido.</mat-error>
         </mat-form-field>
       </div>
       <div>
