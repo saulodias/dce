@@ -1,0 +1,10 @@
+<mat-toolbar color="primary" class="navbar mat-elevation-z6 " >
+  <div>
+    <span *ngFor="let route of routes; first as isFirst">
+      <button mat-button routerLink="{{route.path}}" routerLinkActive="active">
+        <img *ngIf="isFirst" src="../../assets/puzzle.svg" width="25" height="25" style="vertical-align: middle">
+        {{route.data.title}}
+      </button>
+    </span>
+  </div>
+</mat-toolbar>
