@@ -1,4 +1,4 @@
-<mat-vertical-stepper [linear]="true" #stepper>
+<mat-vertical-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="dadosPessoais">
     <form [formGroup]="dadosPessoais">
       <ng-template matStepLabel>Dados pessoais</ng-template>
@@ -29,7 +29,7 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="CPF" formControlName="cpf" mask="000.000.000-00">
-          <mat-error *ngIf="dadosPessoais.controls.cpf?.errors?.cpf">O CPF digitádo é inválido.</mat-error>
+          <mat-error *ngIf="dadosPessoais.controls.cpf?.errors?.cpf">O CPF digitado é inválido.</mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -42,7 +42,9 @@
       <ng-template matStepLabel>Endereço</ng-template>
       <div fxLayout="row">
         <mat-form-field>
-          <input matInput placeholder="CEP" formControlName="cep">
+          <input matInput placeholder="CEP" formControlName="cep" mask="00000-000">
+          <mat-error  *ngIf="endereco.controls.cep?.errors?.cep">O CEP sdigitado é inválido.</mat-error>
+          <!-- <mat-error  *ngIf="endereco.controls.cep?.errors?.cep">{{endereco.controls.cep?.errors| json}}</mat-error> -->
         </mat-form-field>
       </div>
       <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
@@ -56,9 +58,20 @@
           <input matInput placeholder="Complemento" formControlName="complemento">
         </mat-form-field>
       </div>
+       <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+          <mat-form-field>
+              <input matInput placeholder="Bairro" formControlName="bairro">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Cidade" formControlName="cidade">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="UF" formControlName="uf">
+            </mat-form-field>
+       </div>
       <div>
-        <button mat-button matStepperPrevious>Avançar</button>
-        <button mat-button matStepperNext>Voltar</button>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext>Avançar</button>
       </div>
     </form>
   </mat-step>

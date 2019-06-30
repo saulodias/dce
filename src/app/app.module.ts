@@ -1,15 +1,19 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { SharedModule } from './shared/shared.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DneComponent } from './dne/dne.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SobreComponent } from './sobre/sobre.component';
 import { DneModule } from './dne/dne.module';
+import { CepService } from './services/cep.service';
+
 
 @NgModule({
   declarations: [
@@ -24,11 +28,13 @@ import { DneModule } from './dne/dne.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     DneModule,
     SharedModule
   ],
   providers: [
-    Title
+    Title,
+    CepService
   ],
   bootstrap: [AppComponent]
 })
