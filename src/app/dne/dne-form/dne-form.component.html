@@ -49,21 +49,18 @@
             <mat-error *ngIf="dadosAcademicos.controls.matricula?.errors?.pattern || 
             dadosAcademicos.controls.matricula?.errors?.matricula">A matrícula digitada é inválida.</mat-error>
           </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Curso" formControlName="curso" readonly>
+        </div>
+        <div fxLayout="row">
+            <mat-form-field style="width: 376px;">
+              <input matInput placeholder="Curso" formControlName="curso" readonly>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field style="width: 376px;">
+            <input matInput placeholder="Autenticação de Matrícula" formControlName="autenticacao" mask="AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA">
+            <mat-hint>Código localizado no rodapé do comprovante de matrícula. Exemplo: 09A4.344C.D89A.5CB8.7D45.8110.EE75.FBA2</mat-hint>
           </mat-form-field>
         </div>
-        <!-- <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
-          <mat-form-field>
-            <input matInput placeholder="Logradouro" formControlName="logradouro">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Número" formControlName="numero">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput placeholder="Complemento" formControlName="complemento">
-          </mat-form-field>
-        </div> -->
       </form>
     </mat-step>
   <mat-step [stepControl]="endereco">
@@ -85,6 +82,7 @@
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Complemento" formControlName="complemento">
+          <mat-hint>Exemplo: Bloco A, Ap. 1203</mat-hint>
         </mat-form-field>
       </div>
        <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">

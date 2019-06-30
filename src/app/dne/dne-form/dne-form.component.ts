@@ -79,7 +79,8 @@ export class DneFormComponent implements OnInit {
     });
     this.dadosAcademicos = this.formBuilder.group({
       matricula: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')],
-      curso: ['']
+      curso: [''],
+      autenticacao: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')]
     });
     this.endereco = this.formBuilder.group({
       cep: ['', Validators.required],
@@ -108,7 +109,7 @@ export class DneFormComponent implements OnInit {
       gaut: 'Engenharia de Controle e Automação',
       gel: 'Engenharia Elétrica',
       gelt: 'Engenharia Eletrônica',
-      gtel: 'Engeharia de Telecomunicações'
+      gtel: 'Engenharia de Telecomunicações'
     };
     const curso = matricula.substr(7).toLowerCase();
 
