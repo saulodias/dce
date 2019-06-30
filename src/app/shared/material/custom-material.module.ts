@@ -4,6 +4,7 @@ import { MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, Ma
    MatFormFieldModule, MatInputModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule,
    MAT_DATE_LOCALE, MatTooltipModule} from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatFileUploadModule } from 'mat-file-upload';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFileUploadModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},

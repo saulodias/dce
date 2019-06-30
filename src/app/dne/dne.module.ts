@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgxMaskModule } from 'ngx-mask';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [ DneFormComponent ],
@@ -12,7 +13,8 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    PdfViewerModule
   ],
   exports: [ DneFormComponent ]
 })

@@ -104,6 +104,15 @@ export class DneFormComponent implements OnInit {
       }
     });
   }
+
+  onUploadClicked(event) {
+    console.log(event);
+  }
+
+  onSelectedFilesChanged(event) {
+    console.log(event);
+  }
+
   autoCompleteCurso(matricula: string) {
     const cursos = {
       gaut: 'Engenharia de Controle e Automação',
