@@ -1,7 +1,17 @@
+:host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
 .navbar {
     justify-content: space-between;
     padding: 8px 16px;
 }
+
 .mat-toolbar-row, .mat-toolbar-single-row {
     height: inherit;
+    width: 100%;
 }

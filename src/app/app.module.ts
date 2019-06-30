@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DneComponent } from './dne/dne.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SobreComponent } from './sobre/sobre.component';
+import { DneModule } from './dne/dne.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SobreComponent } from './sobre/sobre.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    DneModule,
     SharedModule
   ],
   providers: [

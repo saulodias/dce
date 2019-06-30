@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DneFormComponent } from './dne-form/dne-form.component';
-import { CustomMaterialModule } from '../shared/material/custom-material.module';
+import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [ DneFormComponent ],
   imports: [
-    CustomMaterialModule,
+    SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
   ],
   exports: [ DneFormComponent ]
 })

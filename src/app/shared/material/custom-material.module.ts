@@ -1,7 +1,8 @@
 // Angular material modules used in the application
 import { NgModule } from '@angular/core';
 import { MatButtonModule, MatCheckboxModule, MatIconModule, MatToolbarModule, MatStepperModule,
-   MatFormFieldModule, MatInputModule, MatGridListModule, MatDatepickerModule} from '@angular/material';
+   MatFormFieldModule, MatInputModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule,
+   MAT_DATE_LOCALE} from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 
 
@@ -18,8 +19,12 @@ import { MatMenuModule } from '@angular/material/menu';
     MatMenuModule,
     MatInputModule,
     MatGridListModule,
-    MatDatepickerModule
-  ]
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+  ],
 })
 export class CustomMaterialModule {
 }

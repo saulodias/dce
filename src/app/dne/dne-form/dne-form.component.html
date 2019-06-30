@@ -1,35 +1,63 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
+  <mat-step [stepControl]="dadosPessoais">
+    <form [formGroup]="dadosPessoais">
       <ng-template matStepLabel>Dados pessoais</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Nome" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Sobrenome" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <!-- <mat-form-field class="example-full-width">
-        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
-      <mat-form-field>
-        <input matInput placeholder="Sobrenome" formControlName="firstCtrl" required>
-      </mat-form-field>
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+        <mat-form-field>
+          <input matInput placeholder="Nome" formControlName="nome">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Sobrenome" formControlName="sobrenome">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field>
+          <input matInput (click)="picker.open()" placeholder="Nascimento" [min]="minDate" [max]="maxDate"
+            [matDatepicker]="picker" formControlName="nascimento" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+        <mat-form-field>
+          <input matInput placeholder="RG" formControlName="rg">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="CPF" formControlName="cpf">
+        </mat-form-field>
+      </div>
       <div>
-        <button mat-button matStepperNext>Avançar</button>
+        <button mat-button matStepperNext [disabled]="!dadosPessoais.valid">Avançar</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="endereco">
+    <form [formGroup]="endereco">
       <ng-template matStepLabel>Endereço</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
+      <div fxLayout="row">
+        <mat-form-field>
+          <input matInput placeholder="CEP" formControlName="cep">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+        <mat-form-field>
+          <input matInput placeholder="Logradouro" formControlName="logradouro">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Número" formControlName="numero">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Complemento" formControlName="complemento">
+        </mat-form-field>
+      </div>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Avançar</button>
+        <button mat-button matStepperNext>Voltar</button>
       </div>
     </form>
   </mat-step>

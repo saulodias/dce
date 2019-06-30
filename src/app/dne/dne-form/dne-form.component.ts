@@ -7,21 +7,28 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./dne-form.component.scss']
 })
 export class DneFormComponent implements OnInit {
-  isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  
-  minDate = new Date(2000, 0, 1);
-  maxDate = new Date(2020, 0, 1);
+  dadosPessoais: FormGroup;
+  endereco: FormGroup;
+
+  minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 65));
+  maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - 16));
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    this.dadosPessoais = this.formBuilder.group({
+      nome: ['', Validators.required],
+      sobrenome: ['', Validators.required],
+      nascimento: ['', Validators.required],
+      email: [''],
+      rg: ['', Validators.required],
+      cpf: ['', Validators.required]
     });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.endereco = this.formBuilder.group({
+      cep: ['', Validators.required],
+      logradouro: ['', Validators.required],
+      numero: ['', Validators.required],
+      complemento: ['']
     });
   }
 
