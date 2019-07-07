@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CepService } from '../../services/cep.service';
+import { DneService } from '../../services/dne.service';
+import { create } from 'domain';
 
 function cpfValidator(control: FormControl) {
   const cpf = control.value.replace(/-|\./g, ''); // remove - and .
@@ -53,12 +55,18 @@ export class DneFormComponent implements OnInit {
   searchingCep = false;
   cepIsInvalid = false;
   enderecoResp: any;
-  minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 65));
+  minDate = new Date(new Date().setFullYear(new Date().getFullYear() - 100));
   maxDate = new Date(new Date().setFullYear(new Date().getFullYear() - 16));
+
+  // tslint:disable: object-literal-key-quotes ! Don't remove this rule
+  public autenticacaoPattern = {'A': { pattern: new RegExp('[0-9a-fA-F]')}};
+  public matriculaPattern = {'0': {pattern: new RegExp('[0-9]')}, 'A': {pattern: new RegExp('[a-zA-Z]')},
+   'B': {pattern: new RegExp('[a-zA-Z]'), optional: true}};
 
   constructor(
     private formBuilder: FormBuilder,
-    private cepService: CepService
+    private cepService: CepService,
+    private dneService: DneService
     ) { }
 
   ngOnInit() {
@@ -79,9 +87,9 @@ export class DneFormComponent implements OnInit {
     });
 
     this.dadosAcademicos = this.formBuilder.group({
-      matricula: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')],
-      curso: [''],
-      autenticacao: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')]
+      matricula: ['', Validators.required],
+      curso: ['', Validators.required],
+      autenticacao: ['', Validators.required]
     });
 
     this.endereco = this.formBuilder.group({
@@ -159,5 +167,21 @@ export class DneFormComponent implements OnInit {
           subscription.unsubscribe();
         }
       );
+  }
+
+  onSubmit() {
+    const obj = Object.assign({}, this.dadosPessoais.value);
+    Object.keys(obj).map(k => { // trim only strings
+      if (Object.prototype.toString.call(obj[k]) === '[object String]') {
+        obj[k] = obj[k].trim();
+      }
+    });
+    const dneSubscription = this.dneService.createDneOrder(obj)
+    .subscribe({
+      next: resp => console.log(resp),
+      error: err => console.log(err),
+      complete: () => dneSubscription.unsubscribe()
+    });
+
   }
 }

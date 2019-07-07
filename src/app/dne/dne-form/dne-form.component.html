@@ -24,8 +24,8 @@
           <input matInput placeholder="Email" type="email" formControlName="email">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Celular" formControlName="celular" mask="(00) 0000-00000">
-          </mat-form-field>
+          <input matInput placeholder="Celular" formControlName="celular" mask="(00) 0000-00000">
+        </mat-form-field>
       </div>
       <div fxLayout="row">
         <mat-form-field>
@@ -50,35 +50,43 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="dadosAcademicos">
-      <form [formGroup]="dadosAcademicos">
-        <ng-template matStepLabel>Dados Acadêmicos</ng-template>
-        <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
-          <mat-form-field>
-            <input matInput placeholder="Matrícula" formControlName="matricula" style="text-transform: uppercase;" maxlength="11">
-            <mat-error *ngIf="dadosAcademicos.controls.matricula?.errors?.pattern || 
+    <form [formGroup]="dadosAcademicos">
+      <ng-template matStepLabel>Dados Acadêmicos</ng-template>
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+        <mat-form-field>
+          <input matInput placeholder="Matrícula" formControlName="matricula" style="text-transform: uppercase;"
+          [patterns]="matriculaPattern" mask="0000000AAAB">
+          <mat-error *ngIf="dadosAcademicos.controls.matricula?.errors?.pattern || 
             dadosAcademicos.controls.matricula?.errors?.matricula">A matrícula digitada é inválida.</mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row">
-            <mat-form-field style="width: 376px;">
-              <input matInput placeholder="Curso" formControlName="curso" readonly>
-            </mat-form-field>
-        </div>
-        <div fxLayout="row">
-          <mat-form-field style="width: 376px;">
-            <input matInput placeholder="Autenticação de Matrícula" formControlName="autenticacao" mask="AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA">
-            <mat-hint>Código localizado no rodapé do comprovante de matrícula. Exemplo: 09A4.344C.D89A.5CB8.7D45.8110.EE75.FBA2</mat-hint>
-          </mat-form-field>
-        </div>
-      </form>
-    </mat-step>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field style="width: 376px;">
+          <input matInput placeholder="Curso" formControlName="curso" readonly>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field style="width: 376px;">
+          <input matInput placeholder="Autenticação de Matrícula" formControlName="autenticacao"
+            style="text-transform: uppercase;" [patterns]="autenticacaoPattern" mask="AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA.AAAA">
+          <mat-hint>Código localizado no rodapé do comprovante de matrícula. Exemplo:
+            09A4.344C.D89A.5CB8.7D45.8110.EE75.FBA2</mat-hint>
+        </mat-form-field>
+      </div>
+      <div>
+        <br>
+        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperNext [disabled]="!dadosAcademicos.valid">Avançar</button>
+      </div>
+    </form>
+  </mat-step>
   <mat-step [stepControl]="endereco">
     <form [formGroup]="endereco">
       <ng-template matStepLabel>Endereço</ng-template>
       <div fxLayout="row">
         <mat-form-field>
           <input matInput placeholder="CEP" formControlName="cep" mask="00000-000">
-          <mat-error  *ngIf="endereco.controls.cep?.errors?.cep">O CEP sdigitado é inválido.</mat-error>
+          <mat-error *ngIf="endereco.controls.cep?.errors?.cep">O CEP sdigitado é inválido.</mat-error>
           <!-- <mat-error  *ngIf="endereco.controls.cep?.errors?.cep">{{endereco.controls.cep?.errors| json}}</mat-error> -->
         </mat-form-field>
       </div>
@@ -94,29 +102,30 @@
           <mat-hint>Exemplo: Bloco A, Ap. 1203</mat-hint>
         </mat-form-field>
       </div>
-       <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
-          <mat-form-field>
-              <input matInput placeholder="Bairro" formControlName="bairro">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="Cidade" formControlName="cidade">
-            </mat-form-field>
-            <mat-form-field>
-              <input matInput placeholder="UF" formControlName="uf">
-            </mat-form-field>
-       </div>
+      <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+        <mat-form-field>
+          <input matInput placeholder="Bairro" formControlName="bairro">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Cidade" formControlName="cidade">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="UF" formControlName="uf">
+        </mat-form-field>
+      </div>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-button matStepperNext>Avançar</button>
+        <button mat-button matStepperNext [disabled]="!endereco.valid">Avançar</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Fim</ng-template>
-    You are now done.
+      <span>Você receberá um email com o número do seu protocolo.</span><br>
+      <span>Após a confirmação do pagamento poderá realizar o agendamento no site.</span>
     <div>
       <button mat-button matStepperPrevious>Voltar</button>
-      <button mat-button (click)="stepper.reset()">Avançar</button>
+      <button mat-button (click)="onSubmit()">Concluir</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
