@@ -1,46 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { cpfValidator, trimValues } from '../../shared/utils';
 import { CepService } from '../../services/cep.service';
 import { DneService } from '../../services/dne.service';
-import { create } from 'domain';
-
-function cpfValidator(control: FormControl) {
-  const cpf = control.value.replace(/-|\./g, ''); // remove - and .
-  const cpf9 = cpf.slice(0, 9);
-  const dig1 = cpf.slice(9, 10);
-  const dig2 = cpf.slice(10, 11);
-  let coef = 10;
-  let sum = 0;
-  for (let i = 0; i < cpf9.length; i++) {
-    const dig = Number(cpf.charAt(i));
-    sum += coef * dig;
-    coef--;
-  }
-  let calculatedDig1 = sum * 10 % 11;
-  if (calculatedDig1 === 10) { calculatedDig1 = 0; }
-  const calcDig1 = String(calculatedDig1);
-
-  coef = 11;
-  sum = 0;
-  for (let i = 0; i < cpf9.concat(calcDig1).length; i++) {
-    const dig = Number(cpf.charAt(i));
-    sum += coef * dig;
-    coef--;
-  }
-  let calculatedDig2 = sum * 10 % 11;
-  if (calculatedDig2 === 10) { calculatedDig2 = 0; }
-  const calcDig2 = String(calculatedDig2);
-
-  const isValid = (calcDig1 === dig1 && calcDig2 === dig2);
-
-  if (!isValid) {
-    return {
-      cpf: true
-    };
-  }
-  return null;
-}
-
 
 @Component({
   selector: 'dce-dne-form',
@@ -170,12 +132,7 @@ export class DneFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const obj = Object.assign({}, this.dadosPessoais.value);
-    Object.keys(obj).map(k => { // trim only strings
-      if (Object.prototype.toString.call(obj[k]) === '[object String]') {
-        obj[k] = obj[k].trim();
-      }
-    });
+    const obj = trimValues(this.dadosPessoais.value);
     const dneSubscription = this.dneService.createDneOrder(obj)
     .subscribe({
       next: resp => console.log(resp),
