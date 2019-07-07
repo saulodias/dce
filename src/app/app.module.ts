@@ -13,6 +13,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { SobreComponent } from './sobre/sobre.component';
 import { DneModule } from './dne/dne.module';
 import { CepService } from './services/cep.service';
+import { DneService } from './services/dne.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { CepService } from './services/cep.service';
   ],
   providers: [
     Title,
-    CepService
+    CepService,
+    DneService
   ],
   bootstrap: [AppComponent]
 })

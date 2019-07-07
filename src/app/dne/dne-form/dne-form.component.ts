@@ -77,11 +77,13 @@ export class DneFormComponent implements OnInit {
         Validators.min(4),
         cpfValidator]],
     });
+
     this.dadosAcademicos = this.formBuilder.group({
       matricula: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')],
       curso: [''],
       autenticacao: ['', Validators.pattern('[0-9]{7}[a-zA-Z]{3,4}')]
     });
+
     this.endereco = this.formBuilder.group({
       cep: ['', Validators.required],
       logradouro: ['', Validators.required],
