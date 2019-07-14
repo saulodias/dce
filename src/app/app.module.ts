@@ -14,6 +14,7 @@ import { SobreComponent } from './sobre/sobre.component';
 import { DneModule } from './dne/dne.module';
 import { CepService } from './services/cep.service';
 import { DneService } from './services/dne.service';
+import { CadastroFormComponent } from './cadastro-form/cadastro-form.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DneService } from './services/dne.service';
     NavbarComponent,
     DneComponent,
     InicioComponent,
-    SobreComponent
+    SobreComponent,
+    CadastroFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComprovanteService } from '../services/comprovante.service';
 
 @Component({
   selector: 'dce-inicio',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private comprovanteService: ComprovanteService) { }
 
   ngOnInit() {
+    // this.comprovanteService.getComprovante('09F4.344D.E87A.5CB8.7D82.8110.EE75.BFA2').subscribe(
+    //   (resp) => {
+    //     console.log(resp);
+    //   }
+    // );
   }
 
 }

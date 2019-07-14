@@ -1,0 +1,26 @@
+<form formGroup="register">
+    <ng-template matStepLabel>Cadastro</ng-template>
+    <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+      <mat-form-field>
+        <input matInput placeholder="Login" formControlName="username">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" formControlName="email">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+      <mat-form-field>
+        <input matInput type="password" placeholder="Senha" formControlName="password">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="16px" flexLayout.sm="column">
+      <mat-form-field>
+        <input matInput type="password" placeholder="Repita a senha" formControlName="repeatPassword">
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-button [disabled]="!register.valid">Concluir</button>
+    </div>
+  </form>
